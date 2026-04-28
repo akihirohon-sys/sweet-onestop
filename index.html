@@ -1595,10 +1595,14 @@ body.menu-open { overflow: hidden; }
   .hero { padding: 120px 20px 60px; }
   .hero h1 { font-size: 34px; }
   .hero-trust { gap: 16px; }
-  .hero-card-1 { width: 160px; }
-  .hero-card-2 { width: 180px; top: 60px; }
-  .hero-card-3 { width: 200px; left: 20px; }
-  .hero-card-4 { width: 150px; }
+  .hero-card-1 { width: 160px; z-index: 1; }
+  .hero-card-2 {
+    width: 180px;
+    top: 60px;
+    z-index: 4; /* 印刷物制作を最前面に配置 */
+  }
+  .hero-card-3 { width: 200px; left: 20px; z-index: 2; }
+  .hero-card-4 { width: 150px; z-index: 3; }
   
   section, .problems, .solution, .features, .process, .pricing, .testimonials, .contact, .cta-section {
     padding-left: 20px; padding-right: 20px; padding-top: 80px; padding-bottom: 80px;
@@ -1717,7 +1721,7 @@ body.menu-open { overflow: hidden; }
       <div class="hero-card hero-card-4">
         <div class="card-symbol allinone"><span></span><span></span><span></span><span></span></div>
         <div class="label">ALL-IN-ONE</div>
-        <div class="title">ぜんぶ<br>おまかせ</div>
+        <div class="title">全部<br>おまかせ</div>
       </div>
     </div>
   </div>
