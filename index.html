@@ -3,1087 +3,2155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SWEET ONESTOP STUDIO — Design, Print & Film Production</title>
+<title>SWEET ONESTOP STUDIO | デザイン・印刷・映像制作をワンストップで</title>
+<meta name="description" content="デザイン制作から印刷、企業の映像制作までワンストップでお任せ。窓口一本化でスピーディーに、統一感のあるクリエイティブをお届けします。">
+
+<!-- Google Fonts: Mamelon(マメロン)はGoogle Fontsに無いため、丸みのあるゴシック「Zen Maru Gothic」と読みやすい「M PLUS Rounded 1c」を使用 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter+Tight:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Zen+Maru+Gothic:wght@400;500;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
+/* ============================================
+   01. CSS変数 — カラーパレット & 基本設定
+============================================ */
 :root {
-  --bg: #0E0E10;
-  --bg-soft: #161618;
-  --bg-card: #1C1C1F;
-  --line: #2A2A2D;
-  --text: #EDEDED;
-  --text-soft: #9A9A9F;
-  --text-mute: #6A6A6F;
-  --accent: #E8C77E;
-  --accent-soft: #C9A668;
-  --rose: #C9A8A0;
+  --primary: #1F7AEC;
+  --primary-dark: #0F5BC0;
+  --primary-light: #E8F1FE;
+  --accent-orange: #FF7A45;
+  --accent-yellow: #FFD93D;
+  --accent-green: #34C77A;
+  --accent-pink: #FF6B9D;
+  
+  --bg: #FBFBFD;
+  --bg-soft: #F4F7FB;
+  --card: #FFFFFF;
+  
+  --text: #1A2238;
+  --text-soft: #5A6478;
+  --text-mute: #8A92A6;
+  
+  --border: #E5EAF2;
+  --shadow-sm: 0 4px 12px rgba(31, 122, 236, 0.06);
+  --shadow-md: 0 12px 32px rgba(31, 122, 236, 0.10);
+  --shadow-lg: 0 24px 60px rgba(31, 122, 236, 0.14);
+  
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  
+  /* フォントスタック: 丸みのあるゴシックをベースに、システムフォントへフォールバック */
+  --font-heading: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', sans-serif;
+  --font-body: 'M PLUS Rounded 1c', 'Hiragino Sans', 'Yu Gothic', sans-serif;
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Inter Tight', 'Shippori Mincho', sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
-  overflow-x: hidden;
-  font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  letter-spacing: 0.01em;
+  overflow-x: hidden;
+  font-weight: 500;
 }
-::selection { background: var(--accent); color: var(--bg); }
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-body::before {
-  content: '';
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent-yellow); color: var(--text); }
+
+/* ============================================
+   02. ヘッダー
+============================================ */
+.header {
   position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 1000;
-  mix-blend-mode: overlay;
-}
-nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  padding: 24px 60px;
-  display: flex; justify-content: space-between; align-items: center;
+  top: 0; left: 0; right: 0;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
   z-index: 100;
-  backdrop-filter: blur(20px);
-  background: rgba(14, 14, 16, 0.7);
-  border-bottom: 1px solid var(--line);
+  padding: 16px 40px;
 }
-.logo { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text); }
-.logo-mark { width: 38px; height: 38px; flex-shrink: 0; }
-.logo-text { display: flex; flex-direction: column; line-height: 1; }
-.logo-text .name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; letter-spacing: 0.18em; }
-.logo-text .tagline { font-size: 9px; color: var(--text-mute); letter-spacing: 0.32em; margin-top: 4px; text-transform: uppercase; }
-.nav-links { display: flex; gap: 40px; list-style: none; }
-.nav-links a { text-decoration: none; color: var(--text-soft); font-size: 13px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.4s ease; position: relative; }
-.nav-links a:hover { color: var(--accent); }
-.nav-cta {
-  padding: 12px 28px;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition: all 0.4s ease;
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--primary), var(--accent-orange));
+  border-radius: 12px;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
 }
-.nav-cta::before {
+/* ロゴ図形: 丸と斜線でワンストップを抽象表現 */
+.logo-mark::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: var(--accent);
-  transform: translateY(101%);
-  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
-  z-index: -1;
+  width: 14px; height: 14px;
+  background: white;
+  border-radius: 50%;
+  top: 8px; left: 8px;
 }
-.nav-cta:hover { color: var(--bg); }
-.nav-cta:hover::before { transform: translateY(0); }
+.logo-mark::after {
+  content: '';
+  position: absolute;
+  width: 8px; height: 8px;
+  background: var(--accent-yellow);
+  border-radius: 50%;
+  bottom: 8px; right: 8px;
+}
 
-.hero {
-  min-height: 100vh;
-  padding: 180px 60px 120px;
+.nav { display: flex; align-items: center; gap: 36px; }
+.nav-list { display: flex; gap: 32px; list-style: none; }
+.nav-list a {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-soft);
   position: relative;
-  display: flex; flex-direction: column; justify-content: center;
+  transition: color 0.3s ease;
 }
-.hero-bg-circle {
-  position: absolute; width: 700px; height: 700px;
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 0; height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+.nav-list a:hover { color: var(--primary); }
+.nav-list a:hover::after { width: 100%; }
+
+.nav-cta {
+  background: var(--primary);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(31, 122, 236, 0.25);
+}
+.nav-cta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(31, 122, 236, 0.35);
+}
+
+.menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text); }
+
+/* ============================================
+   03. ファーストビュー (Hero)
+============================================ */
+.hero {
+  position: relative;
+  padding: 160px 40px 100px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(255, 122, 69, 0.12), transparent 50%),
+    radial-gradient(ellipse at 10% 80%, rgba(52, 199, 122, 0.10), transparent 50%),
+    var(--bg);
+}
+/* 背景の浮遊シェイプ */
+.hero::before, .hero::after {
+  content: '';
+  position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 199, 126, 0.08) 0%, transparent 70%);
-  top: -200px; right: -200px; pointer-events: none;
-}
-.hero-bg-circle-2 {
-  position: absolute; width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 168, 160, 0.05) 0%, transparent 70%);
-  bottom: -100px; left: -100px; pointer-events: none;
-}
-.hero-meta {
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 40px;
-  font-size: 11px; letter-spacing: 0.3em; color: var(--text-mute); text-transform: uppercase;
-}
-.hero-meta .line { width: 60px; height: 1px; background: var(--accent); }
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(56px, 9vw, 144px);
-  font-weight: 300;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  margin-bottom: 50px;
-}
-.hero h1 .accent { font-style: italic; color: var(--accent); font-weight: 400; }
-.hero h1 .jp {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 0.4em; font-weight: 400; display: block;
-  color: var(--text-soft); letter-spacing: 0.2em; margin-top: 24px;
-}
-.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-top: 80px; }
-.hero-description {
-  max-width: 480px; font-size: 15px; line-height: 1.9; color: var(--text-soft);
-  font-family: 'Shippori Mincho', serif;
-}
-.hero-actions { display: flex; flex-direction: column; gap: 24px; align-items: flex-end; }
-
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 16px;
-  padding: 18px 32px;
-  background: var(--accent); color: var(--bg);
-  text-decoration: none;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-  transition: all 0.4s ease;
-  border: 1px solid var(--accent);
-}
-.btn-primary:hover { background: transparent; color: var(--accent); }
-.btn-primary svg { transition: transform 0.4s ease; }
-.btn-primary:hover svg { transform: translateX(6px); }
-
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 12px;
-  color: var(--text-soft); text-decoration: none;
-  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-  padding-bottom: 4px; border-bottom: 1px solid var(--line);
-  transition: all 0.4s ease;
-}
-.btn-ghost:hover { color: var(--accent); border-bottom-color: var(--accent); }
-
-.scroll-indicator {
-  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  color: var(--text-mute); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-}
-.scroll-line {
-  width: 1px; height: 50px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: scroll-pulse 2s ease-in-out infinite;
-}
-@keyframes scroll-pulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.8); transform-origin: top; }
-  50% { opacity: 1; transform: scaleY(1); }
-}
-
-section { padding: 140px 60px; position: relative; }
-.section-header {
-  display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
-  margin-bottom: 100px; align-items: end;
-}
-.section-meta {
-  font-size: 11px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase;
-  display: flex; align-items: center; gap: 16px;
-}
-.section-meta .num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px; font-style: italic; color: var(--text-mute); font-weight: 300;
-}
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 5vw, 72px); font-weight: 300;
-  line-height: 1.05; letter-spacing: -0.01em;
-}
-.section-title .italic { font-style: italic; color: var(--accent); }
-.section-title .jp {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 0.3em; display: block; color: var(--text-mute);
-  letter-spacing: 0.2em; margin-top: 16px; font-weight: 400;
-}
-
-.philosophy { border-top: 1px solid var(--line); }
-.philosophy-content { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
-.philosophy-text p {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 17px; line-height: 2; color: var(--text-soft); margin-bottom: 30px;
-}
-.philosophy-text p:first-child::first-letter {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 5em; float: left; line-height: 0.9;
-  margin-right: 16px; margin-top: 4px;
-  color: var(--accent); font-style: italic; font-weight: 300;
-}
-.philosophy-quote {
-  padding: 40px 0 40px 40px;
-  border-left: 1px solid var(--accent);
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 28px; line-height: 1.4;
-  color: var(--text); font-weight: 300;
-}
-.philosophy-quote .author {
-  display: block;
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 11px; font-style: normal; color: var(--text-mute);
-  letter-spacing: 0.3em; margin-top: 24px; text-transform: uppercase;
-}
-
-.services { border-top: 1px solid var(--line); background: var(--bg-soft); }
-.services-list { border-top: 1px solid var(--line); }
-.service-row {
-  display: grid; grid-template-columns: 80px 1fr 2fr 1fr; gap: 40px;
-  padding: 50px 0; border-bottom: 1px solid var(--line);
-  align-items: center; transition: all 0.6s ease;
-  cursor: pointer; position: relative;
-}
-.service-row::before {
-  content: ''; position: absolute; left: 0; top: 0;
-  width: 0; height: 100%;
-  background: var(--accent); opacity: 0.03;
-  transition: width 0.6s ease;
-}
-.service-row:hover::before { width: 100%; }
-.service-row:hover { padding-left: 20px; }
-.service-row:hover .service-name { color: var(--accent); }
-
-.service-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 24px;
-  color: var(--text-mute); font-weight: 300;
-}
-.service-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 36px; font-weight: 400; letter-spacing: -0.01em;
-  transition: color 0.4s ease;
-}
-.service-name .jp {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 12px; display: block; color: var(--text-mute);
-  letter-spacing: 0.3em; margin-top: 6px; font-weight: 400;
-}
-.service-desc {
-  font-size: 14px; color: var(--text-soft); line-height: 1.8;
-  font-family: 'Shippori Mincho', serif;
-}
-.service-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
-.service-tag {
-  font-size: 10px; letter-spacing: 0.2em; color: var(--text-mute);
-  text-transform: uppercase; padding: 4px 10px;
-  border: 1px solid var(--line);
-}
-
-.process { border-top: 1px solid var(--line); }
-.process-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
-  background: var(--line); border: 1px solid var(--line);
-}
-.process-step { background: var(--bg); padding: 50px 32px; position: relative; transition: background 0.4s ease; }
-.process-step:hover { background: var(--bg-card); }
-.process-step:hover .process-num { color: var(--accent); }
-.process-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 300;
-  color: var(--text-mute); font-style: italic;
-  line-height: 1; margin-bottom: 30px;
-  transition: color 0.4s ease;
-}
-.process-label {
-  font-size: 10px; letter-spacing: 0.3em; color: var(--accent);
-  text-transform: uppercase; margin-bottom: 12px;
-}
-.process-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 500; margin-bottom: 14px; line-height: 1.2;
-}
-.process-title .jp {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 11px; display: block; color: var(--text-mute);
-  letter-spacing: 0.2em; margin-top: 6px; font-weight: 400;
-}
-.process-desc {
-  font-size: 13px; color: var(--text-soft); line-height: 1.7;
-  font-family: 'Shippori Mincho', serif;
-}
-
-.works { border-top: 1px solid var(--line); background: var(--bg-soft); }
-.works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.work-item { cursor: pointer; position: relative; }
-.work-item:nth-child(2) { margin-top: 60px; }
-.work-item:nth-child(5) { margin-top: 60px; }
-.work-image {
-  aspect-ratio: 4/5;
-  background: var(--bg-card);
-  margin-bottom: 24px;
-  position: relative; overflow: hidden;
-  border: 1px solid var(--line);
-}
-.work-image::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(14,14,16,0.6) 100%);
+  filter: blur(2px);
+  opacity: 0.5;
   pointer-events: none;
 }
-.work-pattern {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 200px; font-style: italic; font-weight: 300;
-  color: rgba(232, 199, 126, 0.08);
-  transition: transform 1s ease;
+.hero::before {
+  width: 200px; height: 200px;
+  background: var(--accent-yellow);
+  top: 20%; right: 8%;
+  animation: float 6s ease-in-out infinite;
 }
-.work-item:hover .work-pattern { transform: scale(1.1); }
-.work-pattern.style-1 { background: linear-gradient(135deg, #1C1C1F 0%, #2A2A2D 100%); }
-.work-pattern.style-2 { background: radial-gradient(circle at 30% 30%, #2A2A2D 0%, #1C1C1F 70%); }
-.work-pattern.style-3 { background: linear-gradient(45deg, #161618 0%, #1C1C1F 50%, #161618 100%); }
+.hero::after {
+  width: 120px; height: 120px;
+  background: var(--accent-pink);
+  bottom: 15%; left: 5%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-24px) rotate(8deg); }
+}
 
-.work-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.work-cat { font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; }
-.work-year {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px; font-style: italic; color: var(--text-mute);
+.hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
-.work-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-weight: 500; margin-bottom: 6px;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 2px solid var(--primary-light);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
 }
-.work-client { font-size: 12px; color: var(--text-mute); font-family: 'Shippori Mincho', serif; }
+.hero-badge .dot {
+  width: 8px; height: 8px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
 
-.pricing { border-top: 1px solid var(--line); }
-.pricing-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-  background: var(--line); border: 1px solid var(--line);
+.hero h1 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(36px, 5.5vw, 64px);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+  color: var(--text);
 }
-.price-card { background: var(--bg); padding: 60px 50px; transition: background 0.4s ease; position: relative; }
-.price-card.featured { background: var(--bg-card); }
-.price-card:hover { background: var(--bg-card); }
-.price-tag { font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; }
-.price-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 42px; font-weight: 400; margin-bottom: 8px; letter-spacing: -0.01em;
+.hero h1 .highlight {
+  position: relative;
+  display: inline-block;
+  color: var(--primary);
 }
-.price-name .italic { font-style: italic; }
-.price-tagline { font-family: 'Shippori Mincho', serif; font-size: 13px; color: var(--text-mute); margin-bottom: 40px; }
-.price-amount {
-  display: flex; align-items: baseline; gap: 8px;
-  margin-bottom: 50px; padding-bottom: 30px;
-  border-bottom: 1px solid var(--line);
+.hero h1 .highlight::after {
+  content: '';
+  position: absolute;
+  left: -4px; right: -4px;
+  bottom: 6px;
+  height: 14px;
+  background: var(--accent-yellow);
+  z-index: -1;
+  border-radius: 4px;
 }
-.price-currency { font-size: 14px; color: var(--text-mute); letter-spacing: 0.1em; }
-.price-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 56px; font-weight: 400; color: var(--text);
-  line-height: 1; letter-spacing: -0.02em;
+.hero h1 .accent-orange { color: var(--accent-orange); }
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-soft);
+  margin-bottom: 40px;
+  max-width: 540px;
+  font-weight: 500;
 }
-.price-suffix { font-size: 12px; color: var(--text-mute); letter-spacing: 0.1em; }
-.price-features { list-style: none; margin-bottom: 50px; }
-.price-features li {
-  padding: 14px 0; border-bottom: 1px solid var(--line);
-  font-family: 'Shippori Mincho', serif;
-  font-size: 14px; color: var(--text-soft);
-  display: flex; align-items: center; gap: 12px;
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 }
-.price-features li::before {
-  content: '+';
-  color: var(--accent);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-style: italic;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 32px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.price-cta {
-  display: inline-flex; align-items: center; gap: 12px;
-  padding: 14px 0; width: 100%;
-  color: var(--text); text-decoration: none;
-  font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase;
-  border-bottom: 1px solid var(--text);
+.btn-primary {
+  background: var(--accent-orange);
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 122, 69, 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(255, 122, 69, 0.45);
+}
+.btn-secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+.btn-secondary:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-3px);
+}
+.btn .arrow { transition: transform 0.3s ease; font-size: 18px; }
+.btn:hover .arrow { transform: translateX(4px); }
+
+.hero-trust {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+.hero-trust-item .check {
+  width: 22px; height: 22px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: white; font-size: 13px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* ヒーロー右側: 抽象的な図形カードでサービスを表現 */
+.hero-visual {
+  position: relative;
+  height: 480px;
+}
+.hero-card {
+  position: absolute;
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hero-card-1 {
+  top: 0; left: 0;
+  width: 200px;
+  background: linear-gradient(135deg, #1F7AEC, #4A9DFF);
+  color: white;
+  animation: float-card 5s ease-in-out infinite;
+}
+.hero-card-2 {
+  top: 80px; right: 0;
+  width: 220px;
+  animation: float-card 6s ease-in-out infinite 1s;
+}
+.hero-card-3 {
+  bottom: 40px; left: 40px;
+  width: 240px;
+  animation: float-card 7s ease-in-out infinite 0.5s;
+}
+.hero-card-4 {
+  bottom: 0; right: 30px;
+  width: 180px;
+  background: linear-gradient(135deg, #FF7A45, #FFA876);
+  color: white;
+  animation: float-card 5.5s ease-in-out infinite 1.5s;
+}
+@keyframes float-card {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+/* カード内の抽象シンボル */
+.card-symbol {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25);
+  position: relative;
+}
+.hero-card-2 .card-symbol, .hero-card-3 .card-symbol {
+  background: var(--primary-light);
+}
+.card-symbol.design::before {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  background: var(--accent-pink);
+  border-radius: 4px;
+  top: 6px; left: 6px;
+  transform: rotate(15deg);
+}
+.card-symbol.design::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  background: var(--accent-yellow);
+  border-radius: 50%;
+  bottom: 8px; right: 8px;
+}
+.card-symbol.print::before {
+  content: '';
+  position: absolute;
+  width: 28px; height: 18px;
+  border: 2px solid var(--primary);
+  border-radius: 3px;
+  top: 12px; left: 8px;
+  background: white;
+}
+.card-symbol.print::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 12px;
+  background: var(--accent-orange);
+  top: 8px; left: 11px;
+  border-radius: 2px;
+}
+.card-symbol.movie::before {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  border-left: 16px solid var(--accent-orange);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  top: 12px; left: 14px;
+}
+.card-symbol.allinone {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  padding: 8px;
+}
+.card-symbol.allinone span {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 3px;
+}
+.hero-card .label {
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0.7;
+  letter-spacing: 0.15em;
+}
+.hero-card .title {
+  font-size: 17px;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  line-height: 1.4;
+}
+.hero-card-2 .title, .hero-card-3 .title { color: var(--text); }
+.hero-card-2 .label, .hero-card-3 .label { color: var(--text-mute); }
+
+/* ============================================
+   04. 課題訴求セクション
+============================================ */
+.problems {
+  padding: 120px 40px;
+  background: var(--bg-soft);
+}
+.section-inner { max-width: 1280px; margin: 0 auto; }
+
+.section-head {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-tag {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: 999px;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.section-head h2 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.section-head h2 .highlight {
+  color: var(--accent-orange);
+}
+.section-head p {
+  color: var(--text-soft);
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.problem-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 40px 32px;
+  text-align: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid transparent;
+}
+.problem-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-lg);
+}
+/* 問題カードのアイコン: SVG風の図形を組み合わせ */
+.problem-icon {
+  width: 80px; height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+.problem-card:hover .problem-icon { transform: scale(1.08) rotate(-4deg); }
+.problem-icon-1 { background: rgba(255, 122, 69, 0.12); }
+.problem-icon-2 { background: rgba(255, 217, 61, 0.25); }
+.problem-icon-3 { background: rgba(255, 107, 157, 0.15); }
+
+/* 問題1: 複数のドキュメントが分散している様子 */
+.problem-icon-1::before {
+  content: '';
+  position: absolute;
+  width: 30px; height: 38px;
+  background: white;
+  border: 2px solid var(--accent-orange);
+  border-radius: 4px;
+  transform: rotate(-12deg) translateX(-10px);
+  box-shadow: 14px 4px 0 -2px var(--accent-orange), 28px 8px 0 -4px rgba(255, 122, 69, 0.5);
+}
+
+/* 問題2: ばらばらな形が不揃い */
+.problem-icon-2::before {
+  content: '';
+  position: absolute;
+  width: 18px; height: 18px;
+  background: var(--accent-yellow);
+  border-radius: 4px;
+  top: 22px; left: 18px;
+  transform: rotate(20deg);
+}
+.problem-icon-2::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  background: var(--accent-orange);
+  border-radius: 50%;
+  top: 28px; right: 16px;
+}
+
+/* 問題3: 時計と硬貨で時間とコスト */
+.problem-icon-3::before {
+  content: '';
+  position: absolute;
+  width: 36px; height: 36px;
+  border: 3px solid var(--accent-pink);
+  border-radius: 50%;
+  background: white;
+  box-shadow: inset 0 -4px 0 var(--accent-pink);
+}
+.problem-icon-3::after {
+  content: '';
+  position: absolute;
+  width: 3px; height: 14px;
+  background: var(--accent-pink);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  margin-top: -2px;
+  margin-left: 2px;
+}
+
+.problem-card h3 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.problem-card p {
+  color: var(--text-soft);
+  font-size: 14px;
+}
+
+.problems-arrow {
+  text-align: center;
+  margin-top: 48px;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--primary);
+}
+.problems-arrow .down {
+  display: block;
+  font-size: 36px;
+  margin-top: 8px;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ============================================
+   05. 解決策(サービス紹介)
+============================================ */
+.solution {
+  padding: 120px 40px;
+  background: var(--bg);
+}
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 60px;
+}
+.service-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid var(--border);
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.service-card-1::before { background: linear-gradient(90deg, var(--primary), var(--accent-pink)); }
+.service-card-2::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow)); }
+.service-card-3::before { background: linear-gradient(90deg, var(--accent-orange), var(--accent-pink)); }
+
+.service-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+/* サービスアイコン: 図形ベース */
+.service-icon {
+  width: 80px; height: 80px;
+  border-radius: 22px;
+  margin-bottom: 24px;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+.service-card:hover .service-icon { transform: rotate(-8deg) scale(1.05); }
+
+.service-icon-design { background: var(--primary-light); }
+.service-icon-design::before {
+  content: '';
+  position: absolute;
+  width: 28px; height: 28px;
+  background: var(--primary);
+  border-radius: 6px;
+  top: 18px; left: 14px;
+  transform: rotate(15deg);
+}
+.service-icon-design::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  background: var(--accent-pink);
+  border-radius: 50%;
+  bottom: 16px; right: 12px;
+}
+
+.service-icon-print { background: rgba(52, 199, 122, 0.15); }
+.service-icon-print::before {
+  content: '';
+  position: absolute;
+  width: 44px; height: 30px;
+  background: white;
+  border: 2.5px solid var(--accent-green);
+  border-radius: 4px;
+  top: 18px; left: 16px;
+}
+.service-icon-print::after {
+  content: '';
+  position: absolute;
+  width: 32px; height: 6px;
+  background: var(--accent-green);
+  top: 26px; left: 22px;
+  border-radius: 2px;
+  box-shadow: 0 10px 0 var(--accent-green);
+}
+
+.service-icon-movie { background: rgba(255, 122, 69, 0.15); }
+.service-icon-movie::before {
+  content: '';
+  position: absolute;
+  width: 48px; height: 36px;
+  border: 3px solid var(--accent-orange);
+  border-radius: 6px;
+  top: 18px; left: 12px;
+  background: white;
+}
+.service-icon-movie::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  border-left: 16px solid var(--accent-orange);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  top: 28px; left: 30px;
+}
+
+.service-card h3 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.service-card > p {
+  color: var(--text-soft);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.service-tag {
+  background: var(--bg-soft);
+  color: var(--text-soft);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.onestop-banner {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent-orange) 100%);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.onestop-banner::before {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -150px; right: -150px;
+}
+.onestop-banner::after {
+  content: '';
+  position: absolute;
+  width: 200px; height: 200px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  bottom: -100px; left: -100px;
+}
+.onestop-banner h3 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(22px, 3vw, 32px);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  position: relative; z-index: 1;
+}
+.onestop-banner p {
+  font-size: 16px;
+  opacity: 0.95;
+  position: relative; z-index: 1;
+}
+
+/* ============================================
+   06. 強み・特徴
+============================================ */
+.features {
+  padding: 120px 40px;
+  background: var(--bg-soft);
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 36px 24px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.feature-num {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 60px;
+  font-weight: 800;
+  color: var(--primary-light);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  z-index: 0;
+}
+.feature-icon {
+  width: 64px; height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 機能1: 窓口一本化 - チャットバブル */
+.feature-icon-1 { background: var(--primary-light); }
+.feature-icon-1::before {
+  content: '';
+  position: absolute;
+  width: 32px; height: 24px;
+  background: var(--primary);
+  border-radius: 8px;
+  top: 16px; left: 16px;
+}
+.feature-icon-1::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  border-left: 8px solid var(--primary);
+  border-bottom: 8px solid transparent;
+  top: 38px; left: 22px;
+}
+
+/* 機能2: スピード - 稲妻 */
+.feature-icon-2 { background: rgba(255, 122, 69, 0.15); }
+.feature-icon-2::before {
+  content: '';
+  position: absolute;
+  top: 12px; left: 22px;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 8px 18px 0;
+  border-color: transparent var(--accent-orange) transparent transparent;
+  transform: skew(-10deg);
+}
+.feature-icon-2::after {
+  content: '';
+  position: absolute;
+  top: 28px; left: 18px;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 18px 8px 0 0;
+  border-color: var(--accent-orange) transparent transparent transparent;
+  transform: skew(10deg);
+}
+
+/* 機能3: 統一感 - 揃った3つの円 */
+.feature-icon-3 { background: rgba(52, 199, 122, 0.15); }
+.feature-icon-3::before {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  top: 25px; left: 12px;
+  box-shadow: 18px 0 0 var(--accent-green), 36px 0 0 var(--accent-green);
+}
+
+/* 機能4: コスト削減 - 上向き矢印 */
+.feature-icon-4 { background: rgba(255, 217, 61, 0.25); }
+.feature-icon-4::before {
+  content: '';
+  position: absolute;
+  width: 4px; height: 28px;
+  background: #D4A700;
+  top: 24px; left: 30px;
+  border-radius: 2px;
+}
+.feature-icon-4::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 14px solid #D4A700;
+  top: 14px; left: 22px;
+}
+
+.feature-card h3 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 17px;
+  margin-bottom: 10px;
+  position: relative; z-index: 1;
+  line-height: 1.5;
+}
+.feature-card p {
+  font-size: 13px;
+  color: var(--text-soft);
+  position: relative; z-index: 1;
+}
+
+/* ============================================
+   07. 制作の流れ
+============================================ */
+.process {
+  padding: 120px 40px;
+  background: var(--bg);
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 36px; left: 10%; right: 10%;
+  height: 2px;
+  background-image: linear-gradient(to right, var(--primary) 50%, transparent 50%);
+  background-size: 12px 2px;
+  z-index: 0;
+}
+.process-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: var(--bg);
+  padding: 0 8px;
+}
+.step-num {
+  width: 72px; height: 72px;
+  margin: 0 auto 20px;
+  background: white;
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--primary);
   transition: all 0.4s ease;
 }
-.price-cta:hover { color: var(--accent); border-bottom-color: var(--accent); padding-left: 8px; }
-.price-card.featured .price-cta { color: var(--accent); border-bottom-color: var(--accent); }
+.process-step:hover .step-num {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+.process-step h4 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 17px;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+.process-step p {
+  font-size: 13px;
+  color: var(--text-soft);
+}
 
-.stats { padding: 100px 60px; border-top: 1px solid var(--line); background: var(--bg-soft); }
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; }
-.stat-item { text-align: left; padding-left: 30px; border-left: 1px solid var(--line); }
-.stat-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 300; color: var(--accent);
-  line-height: 1; margin-bottom: 12px; letter-spacing: -0.02em;
+/* ============================================
+   08. 料金プラン
+============================================ */
+.pricing {
+  padding: 120px 40px;
+  background: var(--bg-soft);
 }
-.stat-label { font-size: 11px; letter-spacing: 0.25em; color: var(--text-mute); text-transform: uppercase; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.price-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  position: relative;
+  transition: all 0.4s ease;
+}
+.price-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.price-card.featured {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, white, var(--primary-light));
+  transform: scale(1.04);
+}
+.price-card.featured::before {
+  content: 'おすすめ';
+  position: absolute;
+  top: -14px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-orange);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 22px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(255, 122, 69, 0.4);
+}
+.price-name {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.price-tagline {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 24px;
+}
+.price-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.price-amount .yen { font-size: 16px; font-weight: 800; }
+.price-amount .num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.price-amount .unit { font-size: 13px; color: var(--text-mute); font-weight: 700; }
 
-.contact { border-top: 1px solid var(--line); padding: 160px 60px; position: relative; overflow: hidden; }
-.contact-bg-text {
-  position: absolute; bottom: -30px; left: -20px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 320px; font-style: italic; font-weight: 300;
-  color: rgba(232, 199, 126, 0.04);
-  pointer-events: none; white-space: nowrap; line-height: 1;
+.price-features {
+  list-style: none;
+  margin-bottom: 32px;
 }
-.contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; position: relative; z-index: 2; }
-.contact-intro h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(48px, 6vw, 88px); font-weight: 300;
-  line-height: 1; margin-bottom: 40px; letter-spacing: -0.02em;
+.price-features li {
+  padding: 10px 0;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-soft);
 }
-.contact-intro h2 .italic { font-style: italic; color: var(--accent); }
-.contact-intro p {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 16px; line-height: 2; color: var(--text-soft);
-  margin-bottom: 60px; max-width: 440px;
+.price-features li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+  position: relative;
+  background-image: linear-gradient(45deg, transparent 50%, var(--accent-green) 50%);
 }
-.contact-info { display: grid; gap: 30px; }
-.contact-info-item { padding-top: 24px; border-top: 1px solid var(--line); }
-.contact-info-label { font-size: 10px; letter-spacing: 0.3em; color: var(--text-mute); text-transform: uppercase; margin-bottom: 10px; }
-.contact-info-value { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--text); }
+/* チェックマーク表現 */
+.price-features li::before {
+  content: '';
+  width: 18px; height: 18px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+  background-image:
+    linear-gradient(45deg, transparent 30%, white 30%, white 35%, transparent 35%),
+    linear-gradient(-45deg, transparent 50%, white 50%, white 65%, transparent 65%);
+}
+.price-cta {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+.price-cta:hover { background: var(--primary); color: white; }
+.price-card.featured .price-cta {
+  background: var(--primary);
+  color: white;
+}
+.price-card.featured .price-cta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
 
-.contact-form { display: flex; flex-direction: column; gap: 32px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.form-field { display: flex; flex-direction: column; gap: 10px; }
-.form-field label { font-size: 10px; letter-spacing: 0.3em; color: var(--text-mute); text-transform: uppercase; }
-.form-field input, .form-field select, .form-field textarea {
-  background: transparent; border: none;
-  border-bottom: 1px solid var(--line);
-  padding: 14px 0; color: var(--text);
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 15px; font-weight: 400;
-  transition: border-color 0.4s ease;
+/* ============================================
+   09. お客様の声
+============================================ */
+.testimonials {
+  padding: 120px 40px;
+  background: var(--bg);
 }
-.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-  outline: none; border-bottom-color: var(--accent);
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
 }
-.form-field textarea { resize: vertical; min-height: 120px; font-family: 'Shippori Mincho', serif; }
-.form-field select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23E8C77E' stroke-width='1' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0 center;
+.testi-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 32px;
+  position: relative;
+  transition: all 0.4s ease;
+  border: 2px solid var(--border);
 }
-.form-field select option { background: var(--bg); color: var(--text); }
+.testi-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-light);
+}
+.testi-quote {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 64px;
+  color: var(--primary-light);
+  line-height: 0.5;
+  margin-bottom: 16px;
+}
+.testi-stars {
+  color: var(--accent-yellow);
+  margin-bottom: 12px;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+.testi-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+.testi-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.testi-avatar {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  flex-shrink: 0;
+}
+.testi-avatar-1 { background: linear-gradient(135deg, var(--primary), var(--accent-pink)); }
+.testi-avatar-2 { background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); }
+.testi-avatar-3 { background: linear-gradient(135deg, var(--accent-green), var(--primary)); }
+.testi-info { font-size: 13px; }
+.testi-info strong {
+  display: block;
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 2px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+.testi-info span { color: var(--text-mute); }
+
+/* ============================================
+   10. CTAセクション(強め)
+============================================ */
+.cta-section {
+  padding: 100px 40px;
+  background: var(--bg-soft);
+}
+.cta-box {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  padding: 80px 60px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(31, 122, 236, 0.3);
+}
+.cta-box::before, .cta-box::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+.cta-box::before {
+  width: 300px; height: 300px;
+  background: rgba(255, 217, 61, 0.15);
+  top: -100px; right: -100px;
+}
+.cta-box::after {
+  width: 250px; height: 250px;
+  background: rgba(255, 122, 69, 0.18);
+  bottom: -80px; left: -80px;
+}
+.cta-box-inner { position: relative; z-index: 1; }
+.cta-box h2 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(28px, 4.5vw, 44px);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.cta-box p {
+  font-size: 17px;
+  opacity: 0.95;
+  margin-bottom: 36px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-box .hero-ctas { justify-content: center; margin-bottom: 0; }
+.cta-box .btn-primary { background: var(--accent-orange); }
+.cta-box .btn-secondary {
+  background: white;
+  color: var(--primary);
+  border-color: white;
+}
+.cta-box .btn-secondary:hover { background: var(--bg-soft); color: var(--primary-dark); }
+
+/* ============================================
+   11. お問い合わせフォーム
+============================================ */
+.contact {
+  padding: 120px 40px;
+  background: var(--bg);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+.contact-info h2 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  margin-top: 16px;
+}
+.contact-info > p {
+  font-size: 15px;
+  color: var(--text-soft);
+  margin-bottom: 36px;
+}
+.contact-points { list-style: none; margin-bottom: 32px; }
+.contact-points li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.contact-points .icon {
+  width: 32px; height: 32px;
+  background: var(--primary-light);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+/* チェックマーク */
+.contact-points li:nth-child(1) .icon::before {
+  content: '';
+  width: 12px; height: 6px;
+  border-left: 2.5px solid var(--primary);
+  border-bottom: 2.5px solid var(--primary);
+  transform: rotate(-45deg);
+  margin-top: -3px;
+}
+/* 時計マーク */
+.contact-points li:nth-child(2) .icon::before {
+  content: '';
+  width: 14px; height: 14px;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+}
+.contact-points li:nth-child(2) .icon::after {
+  content: '';
+  position: absolute;
+  width: 2px; height: 6px;
+  background: var(--primary);
+  border-radius: 1px;
+  margin-top: -3px;
+}
+/* メールマーク */
+.contact-points li:nth-child(3) .icon::before {
+  content: '';
+  width: 18px; height: 12px;
+  border: 2px solid var(--primary);
+  border-radius: 2px;
+  background: var(--primary-light);
+}
+.contact-points li:nth-child(3) .icon::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 5px solid var(--primary);
+  margin-top: -5px;
+}
+/* 鍵マーク */
+.contact-points li:nth-child(4) .icon::before {
+  content: '';
+  width: 12px; height: 10px;
+  border: 2px solid var(--primary);
+  border-radius: 2px 2px 4px 4px;
+  background: var(--primary-light);
+  margin-top: 3px;
+}
+.contact-points li:nth-child(4) .icon::after {
+  content: '';
+  position: absolute;
+  width: 8px; height: 6px;
+  border: 2px solid var(--primary);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  margin-top: -7px;
+}
+
+.contact-mail {
+  background: var(--primary-light);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-top: 8px;
+}
+.contact-mail-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.contact-mail-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  word-break: break-all;
+}
+.contact-mail-value a { color: var(--text); transition: color 0.3s ease; }
+.contact-mail-value a:hover { color: var(--primary); }
+
+.contact-form {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+.form-group { margin-bottom: 22px; }
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-family: var(--font-heading);
+}
+.form-group label .required {
+  display: inline-block;
+  background: var(--accent-orange);
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+  font-family: var(--font-body);
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  background: var(--bg);
+  transition: all 0.3s ease;
+  color: var(--text);
+  font-weight: 500;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(31, 122, 236, 0.1);
+}
+.form-group textarea { resize: vertical; min-height: 130px; }
 
 .submit-btn {
-  margin-top: 20px; padding: 22px 40px;
-  background: var(--accent); color: var(--bg);
-  border: 1px solid var(--accent);
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.4s ease;
-  display: inline-flex; align-items: center; justify-content: center; gap: 16px;
+  width: 100%;
+  background: var(--accent-orange);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 122, 69, 0.35);
+  margin-top: 8px;
 }
-.submit-btn:hover { background: transparent; color: var(--accent); }
-.submit-btn svg { transition: transform 0.4s ease; }
-.submit-btn:hover svg { transform: translateX(6px); }
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 122, 69, 0.45);
+}
+.submit-btn .arrow { font-size: 18px; }
+.form-privacy {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-mute);
+  margin-top: 16px;
+}
 
-footer { padding: 80px 60px 40px; border-top: 1px solid var(--line); background: var(--bg-soft); }
-.footer-top {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
-  padding-bottom: 60px; border-bottom: 1px solid var(--line);
+/* ============================================
+   12. フッター
+============================================ */
+.footer {
+  background: #131A2B;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 80px 40px 30px;
 }
+.footer-inner { max-width: 1280px; margin: 0 auto; }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.footer-brand .logo { color: white; margin-bottom: 16px; }
 .footer-brand p {
-  font-family: 'Shippori Mincho', serif;
-  font-size: 13px; color: var(--text-soft); line-height: 1.9;
-  margin-top: 24px; max-width: 320px;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+.footer-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-info-item .label {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 .footer-col h5 {
-  font-size: 10px; letter-spacing: 0.3em; color: var(--accent);
-  text-transform: uppercase; margin-bottom: 24px; font-weight: 500;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 14px;
+  color: white;
+  margin-bottom: 18px;
 }
 .footer-col ul { list-style: none; }
-.footer-col ul li { padding: 8px 0; }
-.footer-col ul a { color: var(--text-soft); text-decoration: none; font-size: 13px; transition: color 0.4s ease; }
-.footer-col ul a:hover { color: var(--accent); }
+.footer-col li {
+  padding: 6px 0;
+  font-size: 13px;
+}
+.footer-col a { transition: color 0.3s ease; }
+.footer-col a:hover { color: var(--accent-yellow); }
+
 .footer-bottom {
-  display: flex; justify-content: space-between; align-items: center;
-  padding-top: 40px;
-  font-size: 11px; color: var(--text-mute); letter-spacing: 0.15em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
 }
-.footer-social { display: flex; gap: 24px; }
+.footer-social { display: flex; gap: 12px; }
 .footer-social a {
-  color: var(--text-soft); text-decoration: none;
-  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
-  transition: color 0.4s ease;
+  width: 38px; height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
 }
-.footer-social a:hover { color: var(--accent); }
+.footer-social a:hover {
+  background: var(--accent-orange);
+  transform: translateY(-3px);
+}
 
-@media (max-width: 968px) {
-  nav { padding: 20px 24px; }
-  .nav-links { display: none; }
-  section, .hero { padding-left: 24px; padding-right: 24px; }
-  .hero { padding-top: 140px; padding-bottom: 80px; }
-  .hero-grid, .section-header, .philosophy-content, .contact-content, .form-row {
-    grid-template-columns: 1fr; gap: 40px;
+/* ============================================
+   13. スクロールフェードイン
+============================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   14. レスポンシブ
+============================================ */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { height: 360px; max-width: 480px; margin: 0 auto; }
+  .problems-grid, .solution-grid, .pricing-grid, .testi-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .hero-actions { align-items: flex-start; }
-  .service-row { grid-template-columns: 50px 1fr; gap: 16px; padding: 30px 0; }
-  .service-desc, .service-tags { grid-column: 1 / -1; }
-  .service-tags { justify-content: flex-start; }
-  .process-grid { grid-template-columns: 1fr 1fr; }
-  .works-grid { grid-template-columns: 1fr; }
-  .work-item:nth-child(2), .work-item:nth-child(5) { margin-top: 0; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .footer-top { grid-template-columns: 1fr; gap: 40px; }
-  .footer-bottom { flex-direction: column; gap: 16px; }
-  .contact-bg-text { font-size: 160px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-steps { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
 }
 
-.reveal {
-  opacity: 0; transform: translateY(40px);
-  transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+@media (max-width: 768px) {
+  .header { padding: 12px 20px; }
+  .nav-list, .nav-cta { display: none; }
+  .menu-toggle { display: block; }
+  
+  .hero { padding: 120px 20px 60px; }
+  .hero h1 { font-size: 34px; }
+  .hero-trust { gap: 16px; }
+  .hero-card-1 { width: 160px; }
+  .hero-card-2 { width: 180px; top: 60px; }
+  .hero-card-3 { width: 200px; left: 20px; }
+  .hero-card-4 { width: 150px; }
+  
+  section, .problems, .solution, .features, .process, .pricing, .testimonials, .contact, .cta-section {
+    padding-left: 20px; padding-right: 20px; padding-top: 80px; padding-bottom: 80px;
+  }
+  
+  .problems-grid, .solution-grid, .features-grid, .pricing-grid, .testi-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .price-card.featured { transform: scale(1); }
+  
+  .process-steps { grid-template-columns: 1fr; gap: 32px; }
+  .process-steps::before { display: none; }
+  
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-form { padding: 28px 24px; }
+  
+  .cta-box { padding: 50px 24px; }
+  .onestop-banner { padding: 32px 24px; }
+  
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="logo">
-    <svg class="logo-mark" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="30" cy="30" r="28" fill="none" stroke="#E8C77E" stroke-width="0.8"/>
-      <circle cx="30" cy="30" r="22" fill="none" stroke="#E8C77E" stroke-width="0.5" opacity="0.5"/>
-      <path d="M22 20 Q22 16 26 16 L34 16 Q38 16 38 20 Q38 24 34 24 L26 24 Q22 24 22 28 Q22 32 26 32 L34 32 Q38 32 38 36 Q38 40 34 40 L26 40 Q22 40 22 36" 
-            fill="none" stroke="#E8C77E" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="30" cy="8" r="1" fill="#E8C77E"/>
-      <circle cx="30" cy="52" r="1" fill="#E8C77E"/>
-      <circle cx="8" cy="30" r="1" fill="#E8C77E"/>
-      <circle cx="52" cy="30" r="1" fill="#E8C77E"/>
-    </svg>
-    <div class="logo-text">
-      <div class="name">SWEET ONESTOP</div>
-      <div class="tagline">STUDIO · EST. 2010</div>
-    </div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#philosophy">Philosophy</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#works">Works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Inquiry</a>
-</nav>
+<!-- ====== 01. ヘッダー ====== -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      SWEET ONESTOP
+    </a>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="#solution">サービス</a></li>
+        <li><a href="#features">特徴</a></li>
+        <li><a href="#pricing">料金</a></li>
+        <li><a href="#contact">問い合わせ</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">無料相談</a>
+    </nav>
+    <button class="menu-toggle" aria-label="メニュー">≡</button>
+  </div>
+</header>
 
+<!-- ====== 02. ファーストビュー ====== -->
 <section class="hero">
-  <div class="hero-bg-circle"></div>
-  <div class="hero-bg-circle-2"></div>
-  <div class="hero-meta">
-    <span class="line"></span>
-    <span>Tokyo · Since 2010</span>
-    <span class="line"></span>
-    <span>Design · Print · Film</span>
-  </div>
-  <h1>
-    Crafting <span class="accent">sweet</span><br>
-    stories from<br>
-    concept to <span class="accent">screen.</span>
-    <span class="jp">想いを、形に。形を、物語に。</span>
-  </h1>
-  <div class="hero-grid">
-    <p class="hero-description">
-      ブランディングからグラフィックデザイン、印刷、テレビCM・映像制作まで。私たちは、ひとつのチームで、ひとつのビジョンを丁寧に磨き上げる、ワンストップ・クリエイティブスタジオです。
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
-        Start a Project
-        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-          <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2"/>
-        </svg>
-      </a>
-      <a href="#works" class="btn-ghost">View Selected Works →</a>
-    </div>
-  </div>
-  <div class="scroll-indicator">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<section class="philosophy" id="philosophy">
-  <div class="section-header">
-    <div class="section-meta">
-      <span class="num">01</span>
-      <span>Philosophy</span>
-    </div>
-    <h2 class="section-title">
-      Sweet details, <span class="italic">crafted</span> with intention.
-      <span class="jp">— 思想 —</span>
-    </h2>
-  </div>
-  <div class="philosophy-content">
-    <div class="philosophy-text">
-      <p>SWEET ONESTOP STUDIOは、デザインの一筆、印刷の質感、映像の一秒、そのすべてに「丁寧さ」と「美しさ」を込めることを信条としています。</p>
-      <p>大量に作ることが正解ではない時代において、ひとつのブランドが本当に伝えたい価値を、ひとつのチームが一貫して仕立てる。それが、私たちが選んだスタイルです。</p>
-      <p>クライアントとの対話から生まれる物語を、紙の上に、画面の中に、人の記憶の中に残していく。それが、私たちの仕事です。</p>
-    </div>
-    <div class="philosophy-quote">
-      "Design is not just what it looks like and feels like. Design is how it works — and how it lingers."
-      <span class="author">— Studio Manifesto</span>
-    </div>
-  </div>
-</section>
-
-<section class="services" id="services">
-  <div class="section-header">
-    <div class="section-meta">
-      <span class="num">02</span>
-      <span>Services</span>
-    </div>
-    <h2 class="section-title">
-      One studio, <span class="italic">all crafts.</span>
-      <span class="jp">— 提供サービス —</span>
-    </h2>
-  </div>
-  <div class="services-list">
-    <div class="service-row">
-      <div class="service-num">01</div>
-      <div class="service-name">
-        Branding & Design
-        <span class="jp">ブランディング・デザイン</span>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        中小企業に選ばれて15年・320社の実績
       </div>
-      <div class="service-desc">
-        ブランドの本質を掘り下げ、ロゴ、VI、ガイドライン、エディトリアルまで、世界観を貫いて構築します。
-      </div>
-      <div class="service-tags">
-        <span class="service-tag">Logo</span>
-        <span class="service-tag">VI / CI</span>
-        <span class="service-tag">Editorial</span>
-      </div>
-    </div>
-    <div class="service-row">
-      <div class="service-num">02</div>
-      <div class="service-name">
-        Print Production
-        <span class="jp">印刷・プロダクション</span>
-      </div>
-      <div class="service-desc">
-        紙質、インク、製本まで。質感と耐久性にこだわった、所有したくなる印刷物を仕立てます。
-      </div>
-      <div class="service-tags">
-        <span class="service-tag">Catalog</span>
-        <span class="service-tag">Packaging</span>
-        <span class="service-tag">Card</span>
-      </div>
-    </div>
-    <div class="service-row">
-      <div class="service-num">03</div>
-      <div class="service-name">
-        Film & Commercial
-        <span class="jp">映像・テレビCM</span>
-      </div>
-      <div class="service-desc">
-        企画、絵コンテ、キャスティング、撮影、編集、MAまで。ブランドの物語を映像へと昇華させます。
-      </div>
-      <div class="service-tags">
-        <span class="service-tag">TVCM</span>
-        <span class="service-tag">Web Film</span>
-        <span class="service-tag">Brand Movie</span>
-      </div>
-    </div>
-    <div class="service-row">
-      <div class="service-num">04</div>
-      <div class="service-name">
-        Digital & Strategy
-        <span class="jp">デジタル・戦略</span>
-      </div>
-      <div class="service-desc">
-        Webサイト、SNS、デジタル広告。ブランド体験を、すべての接点で一貫して設計します。
-      </div>
-      <div class="service-tags">
-        <span class="service-tag">Web</span>
-        <span class="service-tag">SNS</span>
-        <span class="service-tag">Strategy</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="process" id="process">
-  <div class="section-header">
-    <div class="section-meta">
-      <span class="num">03</span>
-      <span>Process</span>
-    </div>
-    <h2 class="section-title">
-      From dialogue to <span class="italic">delivery.</span>
-      <span class="jp">— 制作の流れ —</span>
-    </h2>
-  </div>
-  <div class="process-grid">
-    <div class="process-step">
-      <div class="process-num">i.</div>
-      <div class="process-label">Step 01</div>
-      <div class="process-title">Dialogue<span class="jp">対話・ヒアリング</span></div>
-      <div class="process-desc">ブランドの背景、想い、目的を丁寧に伺います。</div>
-    </div>
-    <div class="process-step">
-      <div class="process-num">ii.</div>
-      <div class="process-label">Step 02</div>
-      <div class="process-title">Concept<span class="jp">コンセプト設計</span></div>
-      <div class="process-desc">対話から本質を抽出し、コンセプトを定めます。</div>
-    </div>
-    <div class="process-step">
-      <div class="process-num">iii.</div>
-      <div class="process-label">Step 03</div>
-      <div class="process-title">Design<span class="jp">デザイン制作</span></div>
-      <div class="process-desc">コンセプトを起点に、視覚言語を構築します。</div>
-    </div>
-    <div class="process-step">
-      <div class="process-num">iv.</div>
-      <div class="process-label">Step 04</div>
-      <div class="process-title">Production<span class="jp">制作・撮影</span></div>
-      <div class="process-desc">印刷・撮影を、職人の技で仕立てます。</div>
-    </div>
-    <div class="process-step">
-      <div class="process-num">v.</div>
-      <div class="process-label">Step 05</div>
-      <div class="process-title">Delivery<span class="jp">納品・伴走</span></div>
-      <div class="process-desc">納品後も、ブランドの成長に伴走します。</div>
-    </div>
-  </div>
-</section>
-
-<section class="works" id="works">
-  <div class="section-header">
-    <div class="section-meta">
-      <span class="num">04</span>
-      <span>Selected Works</span>
-    </div>
-    <h2 class="section-title">
-      Stories we've <span class="italic">told.</span>
-      <span class="jp">— 制作実績 —</span>
-    </h2>
-  </div>
-  <div class="works-grid">
-    <div class="work-item">
-      <div class="work-image"><div class="work-pattern style-1">M</div></div>
-      <div class="work-meta"><span class="work-cat">Branding</span><span class="work-year">2025</span></div>
-      <div class="work-title">Maison de Lune</div>
-      <div class="work-client">パティスリーブランド総合設計</div>
-    </div>
-    <div class="work-item">
-      <div class="work-image"><div class="work-pattern style-2">A</div></div>
-      <div class="work-meta"><span class="work-cat">TVCM</span><span class="work-year">2025</span></div>
-      <div class="work-title">Atelier Aoyama</div>
-      <div class="work-client">企業ブランドCM 30秒</div>
-    </div>
-    <div class="work-item">
-      <div class="work-image"><div class="work-pattern style-3">K</div></div>
-      <div class="work-meta"><span class="work-cat">Print</span><span class="work-year">2024</span></div>
-      <div class="work-title">Kiyosumi Coffee</div>
-      <div class="work-client">パッケージ・カタログ制作</div>
-    </div>
-    <div class="work-item">
-      <div class="work-image"><div class="work-pattern style-2">É</div></div>
-      <div class="work-meta"><span class="work-cat">Editorial</span><span class="work-year">2024</span></div>
-      <div class="work-title">Éditions Tokyo</div>
-      <div class="work-client">季刊誌 アートディレクション</div>
-    </div>
-    <div class="work-item">
-      <div class="work-image"><div class="work-pattern style-1">N</div></div>
-      <div class="work-meta"><span class="work-cat">Web Film</span><span class="work-year">2024</span></div>
-      <div class="work-title">Nihonbashi Hotel</div>
-      <div class="work-client">ブランドムービー シリーズ</div>
-    </div>
-    <div class="work-item">
-      <div class="work-image"><div class="work-pattern style-3">V</div></div>
-      <div class="work-meta"><span class="work-cat">Branding</span><span class="work-year">2023</span></div>
-      <div class="work-title">Vinaigre Maison</div>
-      <div class="work-client">食品ブランド総合プロデュース</div>
-    </div>
-  </div>
-</section>
-
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-num">15</div>
-      <div class="stat-label">Years of Craft</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">320</div>
-      <div class="stat-label">Brands Crafted</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">48</div>
-      <div class="stat-label">Awards Received</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">98<span style="font-size:0.5em;">%</span></div>
-      <div class="stat-label">Client Retention</div>
-    </div>
-  </div>
-</section>
-
-<section class="pricing" id="pricing">
-  <div class="section-header">
-    <div class="section-meta">
-      <span class="num">05</span>
-      <span>Pricing</span>
-    </div>
-    <h2 class="section-title">
-      Three ways to <span class="italic">begin.</span>
-      <span class="jp">— 料金プラン —</span>
-    </h2>
-  </div>
-  <div class="pricing-grid">
-    <div class="price-card">
-      <div class="price-tag">Plan 01</div>
-      <div class="price-name"><span class="italic">Petit</span></div>
-      <div class="price-tagline">スタートアップの第一歩に</div>
-      <div class="price-amount">
-        <span class="price-currency">¥</span>
-        <span class="price-num">198,000</span>
-        <span class="price-suffix">〜</span>
-      </div>
-      <ul class="price-features">
-        <li>ロゴ・VI設計</li>
-        <li>名刺デザイン+印刷</li>
-        <li>パンフレット 1種</li>
-        <li>SNS素材 5点</li>
-      </ul>
-      <a href="#contact" class="price-cta">
-        Choose this plan
-        <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
-          <path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" stroke-width="1"/>
-        </svg>
-      </a>
-    </div>
-    <div class="price-card featured">
-      <div class="price-tag">Plan 02 · Most chosen</div>
-      <div class="price-name"><span class="italic">Maison</span></div>
-      <div class="price-tagline">ブランドを本格的に育てる</div>
-      <div class="price-amount">
-        <span class="price-currency">¥</span>
-        <span class="price-num">580,000</span>
-        <span class="price-suffix">〜</span>
-      </div>
-      <ul class="price-features">
-        <li>Petitプラン全内容</li>
-        <li>カタログ・冊子制作</li>
-        <li>Web動画制作 60秒</li>
-        <li>ブランド戦略設計</li>
-        <li>3ヶ月伴走サポート</li>
-      </ul>
-      <a href="#contact" class="price-cta">
-        Choose this plan
-        <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
-          <path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" stroke-width="1"/>
-        </svg>
-      </a>
-    </div>
-    <div class="price-card">
-      <div class="price-tag">Plan 03</div>
-      <div class="price-name"><span class="italic">Atelier</span></div>
-      <div class="price-tagline">本格的な総合プロデュース</div>
-      <div class="price-amount">
-        <span class="price-currency">¥</span>
-        <span class="price-num">1,800,000</span>
-        <span class="price-suffix">〜</span>
-      </div>
-      <ul class="price-features">
-        <li>Maisonプラン全内容</li>
-        <li>テレビCM制作</li>
-        <li>Webサイト構築</li>
-        <li>ブランドムービー</li>
-        <li>1年間継続サポート</li>
-      </ul>
-      <a href="#contact" class="price-cta">
-        Choose this plan
-        <svg width="16" height="8" viewBox="0 0 16 8" fill="none">
-          <path d="M0 4h14M11 1l3 3-3 3" stroke="currentColor" stroke-width="1"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="contact-bg-text">Sweet</div>
-  <div class="contact-content">
-    <div class="contact-intro">
-      <div class="section-meta" style="margin-bottom: 32px;">
-        <span class="num">06</span>
-        <span>Inquiry</span>
-      </div>
-      <h2>
-        Let's craft<br>
-        something <span class="italic">sweet.</span>
-      </h2>
-      <p>
-        プロジェクトのご相談、お見積もりのご依頼、まずはお気軽にお声がけください。担当ディレクターが2営業日以内にご返信いたします。
+      <h1>
+        デザインも、印刷も、<br>
+        <span class="accent-orange">映像</span>も。<br>
+        <span class="highlight">全部まとめて。</span>
+      </h1>
+      <p class="hero-sub">
+        デザイン制作から印刷、企業の映像制作まで、すべてワンストップ。<br>
+        面倒な外注管理はゼロ。窓口ひとつで、統一感のあるクリエイティブを最短でお届けします。
       </p>
-      <div class="contact-info">
-        <div class="contact-info-item">
-          <div class="contact-info-label">Email</div>
-          <div class="contact-info-value">hello@sweet-onestop.studio</div>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">
+          無料で相談する
+          <span class="arrow">→</span>
+        </a>
+        <a href="#pricing" class="btn btn-secondary">
+          料金プランを見る
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><span class="check">✓</span> 相談・見積もり無料</div>
+        <div class="hero-trust-item"><span class="check">✓</span> 最短即日で初回提案</div>
+        <div class="hero-trust-item"><span class="check">✓</span> 全国対応</div>
+      </div>
+    </div>
+    
+    <!-- ヒーロー右: 抽象シンボル付きカード -->
+    <div class="hero-visual">
+      <div class="hero-card hero-card-1">
+        <div class="card-symbol design"></div>
+        <div class="label">DESIGN</div>
+        <div class="title">デザイン制作</div>
+      </div>
+      <div class="hero-card hero-card-2">
+        <div class="card-symbol print"></div>
+        <div class="label">PRINT</div>
+        <div class="title">印刷物制作</div>
+      </div>
+      <div class="hero-card hero-card-3">
+        <div class="card-symbol movie"></div>
+        <div class="label">MOVIE</div>
+        <div class="title">映像制作</div>
+      </div>
+      <div class="hero-card hero-card-4">
+        <div class="card-symbol allinone"><span></span><span></span><span></span><span></span></div>
+        <div class="label">ALL-IN-ONE</div>
+        <div class="title">ぜんぶ<br>おまかせ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 03. 課題訴求 ====== -->
+<section class="problems">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-tag">PROBLEM</span>
+      <h2>こんな<span class="highlight">お悩み</span>、ありませんか?</h2>
+      <p>クリエイティブ制作で、こんなことに困っていませんか?</p>
+    </div>
+    <div class="problems-grid">
+      <div class="problem-card fade-in">
+        <div class="problem-icon problem-icon-1"></div>
+        <h3>会社ごとの<br>やり取りが面倒</h3>
+        <p>デザイン会社、印刷会社、映像会社…。それぞれに発注・確認するだけで時間が溶ける。</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon problem-icon-2"></div>
+        <h3>外注がバラバラで<br>統一感が出ない</h3>
+        <p>パンフと映像でトーンが違う。ロゴの印象もちぐはぐ。ブランドが伝わらない。</p>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-icon problem-icon-3"></div>
+        <h3>時間もコストも<br>かかりすぎる</h3>
+        <p>個別発注は中間マージンも増えがち。スケジュール調整も大変で納期が延びる。</p>
+      </div>
+    </div>
+    <div class="problems-arrow fade-in">
+      そのお悩み、まるごと解決します
+      <span class="down">▼</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 04. 解決策(サービス紹介) ====== -->
+<section class="solution" id="solution">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-tag">SOLUTION</span>
+      <h2>すべて<span class="highlight">ひとつのチーム</span>で、つくります。</h2>
+      <p>デザインから印刷、映像まで。ワンストップだから、早くて、ぶれない。</p>
+    </div>
+    
+    <div class="solution-grid">
+      <div class="service-card service-card-1 fade-in">
+        <div class="service-icon service-icon-design"></div>
+        <h3>デザイン制作</h3>
+        <p>ロゴ、パンフレット、Webサイト、SNSバナーまで。ブランドの世界観をゼロから設計します。</p>
+        <div class="service-tags">
+          <span class="service-tag">ロゴ</span>
+          <span class="service-tag">パンフレット</span>
+          <span class="service-tag">Webデザイン</span>
+          <span class="service-tag">SNS</span>
         </div>
-        <div class="contact-info-item">
-          <div class="contact-info-label">Telephone</div>
-          <div class="contact-info-value">03 — 0000 — 0000</div>
+      </div>
+      
+      <div class="service-card service-card-2 fade-in">
+        <div class="service-icon service-icon-print"></div>
+        <h3>印刷・プロダクト</h3>
+        <p>チラシ、ポスター、名刺、パッケージまで。提携印刷工場で高品質・低コストを実現。</p>
+        <div class="service-tags">
+          <span class="service-tag">チラシ</span>
+          <span class="service-tag">ポスター</span>
+          <span class="service-tag">名刺</span>
+          <span class="service-tag">パッケージ</span>
         </div>
-        <div class="contact-info-item">
-          <div class="contact-info-label">Atelier</div>
-          <div class="contact-info-value">2-1-1 Aoyama, Minato, Tokyo</div>
+      </div>
+      
+      <div class="service-card service-card-3 fade-in">
+        <div class="service-icon service-icon-movie"></div>
+        <h3>映像制作</h3>
+        <p>企画から撮影、編集、納品まで。企業VP、Web動画、商品紹介動画など幅広く対応します。</p>
+        <div class="service-tags">
+          <span class="service-tag">企業VP</span>
+          <span class="service-tag">Web動画</span>
+          <span class="service-tag">商品PV</span>
+          <span class="service-tag">採用動画</span>
         </div>
       </div>
     </div>
-    <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you. We will be in touch within 2 business days.');">
-      <div class="form-row">
-        <div class="form-field">
-          <label>Your Name *</label>
-          <input type="text" placeholder="山田 太郎" required>
+    
+    <div class="onestop-banner fade-in">
+      <h3>すべて一気通貫だから、<br>外注管理はゼロ。</h3>
+      <p>窓口ひとつで、デザインから映像まで。スピードも、品質も、ブランドの統一感も妥協しません。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 05. 強み・特徴 ====== -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-tag">FEATURES</span>
+      <h2>選ばれる<span class="highlight">4つの理由</span></h2>
+      <p>多くの企業様に選ばれてきた、私たちの強みをご紹介します。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-num">01</div>
+        <div class="feature-icon feature-icon-1"></div>
+        <h3>窓口は<br>たったひとつ</h3>
+        <p>担当ディレクターが一貫対応。複数社とのやり取りは不要です。</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">02</div>
+        <div class="feature-icon feature-icon-2"></div>
+        <h3>圧倒的な<br>スピード対応</h3>
+        <p>社内で完結するから速い。最短即日で初回提案、急ぎ案件もOK。</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">03</div>
+        <div class="feature-icon feature-icon-3"></div>
+        <h3>ブランドの<br>統一感</h3>
+        <p>同じチームが手がけるから、紙も映像もぶれない世界観に。</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-num">04</div>
+        <div class="feature-icon feature-icon-4"></div>
+        <h3>まとめて頼んで<br>コスト削減</h3>
+        <p>中間マージンをカット。個別発注より平均20〜30%お得です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 06. 制作の流れ ====== -->
+<section class="process">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-tag">PROCESS</span>
+      <h2>シンプルな<span class="highlight">5ステップ</span></h2>
+      <p>初回ご相談から納品・運用まで、わかりやすい流れでお進めします。</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-in">
+        <div class="step-num">01</div>
+        <h4>ヒアリング</h4>
+        <p>目的や課題を丁寧にお伺いします</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="step-num">02</div>
+        <h4>企画提案</h4>
+        <p>最適な解決プランをご提案</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="step-num">03</div>
+        <h4>制作</h4>
+        <p>専門チームが一貫して制作</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="step-num">04</div>
+        <h4>納品</h4>
+        <p>確認・修正後にお届けします</p>
+      </div>
+      <div class="process-step fade-in">
+        <div class="step-num">05</div>
+        <h4>運用サポート</h4>
+        <p>納品後も継続的にフォロー</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 07. 料金プラン ====== -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-tag">PRICING</span>
+      <h2>わかりやすい<span class="highlight">料金プラン</span></h2>
+      <p>目的やご予算に合わせて、3つのパッケージからお選びいただけます。</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- プラン1: デザインのみ 5万円〜 -->
+      <div class="price-card fade-in">
+        <div class="price-name">デザインのみ</div>
+        <div class="price-tagline">まずはデザインだけ依頼したい方に</div>
+        <div class="price-amount">
+          <span class="yen">¥</span>
+          <span class="num">50,000</span>
+          <span class="unit">〜</span>
         </div>
-        <div class="form-field">
-          <label>Company</label>
-          <input type="text" placeholder="株式会社 ◯◯">
+        <ul class="price-features">
+          <li>ロゴ・VI設計</li>
+          <li>パンフレット 1種</li>
+          <li>名刺デザイン</li>
+          <li>SNSバナー 5点</li>
+          <li>修正2回まで</li>
+        </ul>
+        <a href="#contact" class="price-cta">このプランを相談する</a>
+      </div>
+      
+      <!-- プラン2: 印刷込みパック 10万円〜 (おすすめ) -->
+      <div class="price-card featured fade-in">
+        <div class="price-name">印刷込みパック</div>
+        <div class="price-tagline">デザイン + 印刷物を一括手配</div>
+        <div class="price-amount">
+          <span class="yen">¥</span>
+          <span class="num">100,000</span>
+          <span class="unit">〜</span>
+        </div>
+        <ul class="price-features">
+          <li>デザインプラン全内容</li>
+          <li>チラシ印刷 1,000部</li>
+          <li>パンフレット印刷 500部</li>
+          <li>ポスター A2 50枚</li>
+          <li>名刺印刷 100枚×3名分</li>
+          <li>3ヶ月運用サポート</li>
+        </ul>
+        <a href="#contact" class="price-cta">このプランを相談する</a>
+      </div>
+      
+      <!-- プラン3: 映像制作込みパック 70万円〜 -->
+      <div class="price-card fade-in">
+        <div class="price-name">映像制作込みパック</div>
+        <div class="price-tagline">本格的にブランディングを進める方に</div>
+        <div class="price-amount">
+          <span class="yen">¥</span>
+          <span class="num">700,000</span>
+          <span class="unit">〜</span>
+        </div>
+        <ul class="price-features">
+          <li>印刷込みパック全内容</li>
+          <li>企業紹介動画(15秒)制作</li>
+          <li>Web動画(60秒)制作</li>
+          <li>Webサイト構築</li>
+          <li>ブランドムービー</li>
+          <li>1年間継続サポート</li>
+        </ul>
+        <a href="#contact" class="price-cta">このプランを相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 08. お客様の声 ====== -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <span class="section-tag">VOICE</span>
+      <h2>お客様の<span class="highlight">声</span></h2>
+      <p>実際にご依頼いただいたお客様からの嬉しいご感想をご紹介します。</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">パンフから映像までまるごとお願いできて、とにかく楽でした。トーンの統一感もあって、社内からも「ようやくブランドらしくなった」と好評です。</p>
+        <div class="testi-person">
+          <div class="testi-avatar testi-avatar-1">T</div>
+          <div class="testi-info">
+            <strong>田中様</strong>
+            <span>製造業・経営者</span>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>Email *</label>
-          <input type="email" placeholder="you@email.com" required>
-        </div>
-        <div class="form-field">
-          <label>Phone</label>
-          <input type="tel" placeholder="03-0000-0000">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label>Project Type *</label>
-          <select required>
-            <option value="">Please select</option>
-            <option>Branding & Design</option>
-            <option>Print Production</option>
-            <option>Film & Commercial</option>
-            <option>Digital & Strategy</option>
-            <option>One-stop Package</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>Budget</label>
-          <select>
-            <option value="">Please select</option>
-            <option>Under ¥300,000</option>
-            <option>¥300,000 — ¥1,000,000</option>
-            <option>¥1,000,000 — ¥5,000,000</option>
-            <option>Over ¥5,000,000</option>
-            <option>To be discussed</option>
-          </select>
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">急ぎの店舗オープン案件で、チラシも内装POPも動画もすべて間に合わせてくれました。担当の方の提案力も高く、安心してお任せできました。</p>
+        <div class="testi-person">
+          <div class="testi-avatar testi-avatar-2">S</div>
+          <div class="testi-info">
+            <strong>佐藤様</strong>
+            <span>飲食業・店舗オーナー</span>
+          </div>
         </div>
       </div>
-      <div class="form-field">
-        <label>Tell us about your project *</label>
-        <textarea placeholder="プロジェクトの背景、目的、ご希望のアウトプットなど、お気軽にお聞かせください。" required></textarea>
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">採用動画と説明会パンフを依頼。応募数が前年の2倍以上に。窓口がひとつだから、修正ややり取りもスムーズで助かりました。</p>
+        <div class="testi-person">
+          <div class="testi-avatar testi-avatar-3">Y</div>
+          <div class="testi-info">
+            <strong>山田様</strong>
+            <span>サービス業・広報担当</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 09. CTAセクション(強め) ====== -->
+<section class="cta-section">
+  <div class="cta-box fade-in">
+    <div class="cta-box-inner">
+      <h2>まずは無料相談から、<br>お気軽にどうぞ。</h2>
+      <p>初回のご相談・お見積もりはすべて無料です。<br>「こんなことできる?」レベルの軽いご質問でも歓迎です。</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">
+          無料で相談する
+          <span class="arrow">→</span>
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          見積もりを依頼する
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 10. お問い合わせフォーム ====== -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info fade-in">
+      <span class="section-tag">CONTACT</span>
+      <h2>プロジェクトの<br>ご相談はこちら</h2>
+      <p>お気軽にお問い合わせください。担当ディレクターが2営業日以内にご返信いたします。</p>
+      <ul class="contact-points">
+        <li><span class="icon"></span> ご相談・お見積もりは無料</li>
+        <li><span class="icon"></span> 2営業日以内にご返信</li>
+        <li><span class="icon"></span> 初回オンライン打ち合わせも無料</li>
+        <li><span class="icon"></span> 守秘義務契約(NDA)対応可</li>
+      </ul>
+      <div class="contact-mail">
+        <div class="contact-mail-label">EMAIL</div>
+        <div class="contact-mail-value">
+          <a href="mailto:contact@sweet.jp">contact@sweet.jp</a>
+        </div>
+      </div>
+    </div>
+    
+    <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>お名前 <span class="required">必須</span></label>
+        <input type="text" name="name" placeholder="山田 太郎" required>
+      </div>
+      <div class="form-group">
+        <label>会社名</label>
+        <input type="text" name="company" placeholder="株式会社○○">
+      </div>
+      <div class="form-group">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" name="email" placeholder="example@company.com" required>
+      </div>
+      <div class="form-group">
+        <label>ご相談内容 <span class="required">必須</span></label>
+        <select name="type" required>
+          <option value="">選択してください</option>
+          <option>デザインのみ</option>
+          <option>印刷込みパック</option>
+          <option>映像制作込みパック</option>
+          <option>個別案件のご相談</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>お問い合わせ詳細 <span class="required">必須</span></label>
+        <textarea name="message" placeholder="プロジェクトの概要、ご予算、希望納期などをお聞かせください。" required></textarea>
       </div>
       <button type="submit" class="submit-btn">
-        Send Inquiry
-        <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-          <path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1.2"/>
-        </svg>
+        無料で相談する <span class="arrow">→</span>
       </button>
+      <p class="form-privacy">送信いただいた情報は、お問い合わせへの対応のみに使用します。</p>
     </form>
   </div>
 </section>
 
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="#" class="logo">
-        <svg class="logo-mark" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="30" cy="30" r="28" fill="none" stroke="#E8C77E" stroke-width="0.8"/>
-          <circle cx="30" cy="30" r="22" fill="none" stroke="#E8C77E" stroke-width="0.5" opacity="0.5"/>
-          <path d="M22 20 Q22 16 26 16 L34 16 Q38 16 38 20 Q38 24 34 24 L26 24 Q22 24 22 28 Q22 32 26 32 L34 32 Q38 32 38 36 Q38 40 34 40 L26 40 Q22 40 22 36" 
-                fill="none" stroke="#E8C77E" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="30" cy="8" r="1" fill="#E8C77E"/>
-          <circle cx="30" cy="52" r="1" fill="#E8C77E"/>
-          <circle cx="8" cy="30" r="1" fill="#E8C77E"/>
-          <circle cx="52" cy="30" r="1" fill="#E8C77E"/>
-        </svg>
-        <div class="logo-text">
-          <div class="name">SWEET ONESTOP</div>
-          <div class="tagline">STUDIO · EST. 2010</div>
+<!-- ====== 11. フッター ====== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark"></div>
+          SWEET ONESTOP
+        </a>
+        <p>デザイン・印刷・映像制作をワンストップで。<br>クリエイティブの「ぜんぶ」を、ひとつの窓口でお届けします。</p>
+        <div class="footer-info">
+          <div class="footer-info-item">
+            <span class="label">所在地</span>
+            <span>〒107-0061 東京都港区青山2-1-1</span>
+          </div>
+          <div class="footer-info-item">
+            <span class="label">EMAIL</span>
+            <span>contact@sweet.jp</span>
+          </div>
         </div>
-      </a>
-      <p>デザインから印刷、CMまで。ひとつのチームで、ブランドの物語を仕立てるクリエイティブスタジオです。</p>
+      </div>
+      <div class="footer-col">
+        <h5>サービス</h5>
+        <ul>
+          <li><a href="#solution">デザイン制作</a></li>
+          <li><a href="#solution">印刷・プロダクト</a></li>
+          <li><a href="#solution">映像制作</a></li>
+          <li><a href="#solution">ブランディング</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>会社情報</h5>
+        <ul>
+          <li><a href="#">私たちについて</a></li>
+          <li><a href="#features">特徴</a></li>
+          <li><a href="#pricing">料金プラン</a></li>
+          <li><a href="#">採用情報</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>お問い合わせ</h5>
+        <ul>
+          <li><a href="#contact">お問い合わせ</a></li>
+          <li><a href="#contact">見積もり依頼</a></li>
+          <li><a href="#">よくある質問</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-col">
-      <h5>Studio</h5>
-      <ul>
-        <li><a href="#philosophy">Philosophy</a></li>
-        <li><a href="#process">Process</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><a href="#">Journal</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Services</h5>
-      <ul>
-        <li><a href="#services">Branding</a></li>
-        <li><a href="#services">Print</a></li>
-        <li><a href="#services">Film & CM</a></li>
-        <li><a href="#services">Digital</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Contact</h5>
-      <ul>
-        <li><a href="#contact">Inquiry Form</a></li>
-        <li><a href="mailto:hello@sweet-onestop.studio">Email</a></li>
-        <li><a href="tel:0300000000">Telephone</a></li>
-        <li><a href="#">Press Kit</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div>© 2026 SWEET ONESTOP STUDIO. All rights reserved.</div>
-    <div class="footer-social">
-      <a href="#">Instagram</a>
-      <a href="#">Vimeo</a>
-      <a href="#">Behance</a>
+    <div class="footer-bottom">
+      <div>© 2026 SWEET ONESTOP STUDIO. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="X (Twitter)">X</a>
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">YT</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+/* ============================================
+   JS — スクロールフェードイン & スムーズスクロール
+============================================ */
 
-document.querySelectorAll('.section-header, .service-row, .process-step, .work-item, .price-card, .stat-item, .philosophy-text, .philosophy-quote').forEach((el, index) => {
-  el.classList.add('reveal');
-  el.style.transitionDelay = `${(index % 5) * 0.08}s`;
-  observer.observe(el);
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-
-const stats = document.querySelectorAll('.stat-num');
-const statsObserver = new IntersectionObserver((entries) => {
+// スクロール時に要素をフェードインさせる
+const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const el = entry.target;
-      const text = el.textContent;
-      const match = text.match(/(\d+)/);
-      if (!match) return;
-      const target = parseInt(match[1]);
-      const suffix = text.replace(/[\d]/g, '');
-      const duration = 2000;
-      const start = performance.now();
-      function update(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.innerHTML = Math.floor(target * eased) + suffix;
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
-      statsObserver.unobserve(el);
+      entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.5 });
+}, {
+  threshold: 0.15,
+  rootMargin: '0px 0px -60px 0px'
+});
 
-stats.forEach(stat => statsObserver.observe(stat));
+document.querySelectorAll('.fade-in').forEach((el, i) => {
+  el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+  fadeObserver.observe(el);
+});
+
+// アンカーリンクをスムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// フォーム送信ハンドラ(デモ用)
+function handleSubmit(e) {
+  e.preventDefault();
+  alert('お問い合わせありがとうございます!\n2営業日以内にご返信いたします。');
+  e.target.reset();
+}
+
+// ヘッダーのスクロール時に影を付ける
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.06)';
+  } else {
+    header.style.boxShadow = 'none';
+  }
+});
 </script>
 
 </body>
