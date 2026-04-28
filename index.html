@@ -203,6 +203,38 @@ a { color: inherit; text-decoration: none; }
   opacity: 1;
   visibility: visible;
 }
+
+/* メニュー内の閉じるボタン */
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  background: var(--bg-soft);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+.mobile-menu-close:hover {
+  background: var(--primary-light);
+  transform: rotate(90deg);
+}
+.mobile-menu-close::before,
+.mobile-menu-close::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 2.5px;
+  background: var(--text);
+  border-radius: 2px;
+}
+.mobile-menu-close::before { transform: rotate(45deg); }
+.mobile-menu-close::after { transform: rotate(-45deg); }
 .mobile-menu ul {
   list-style: none;
 }
@@ -1640,6 +1672,7 @@ body.menu-open { overflow: hidden; }
 
 <!-- ====== モバイル用ハンバーガーメニュー ====== -->
 <nav class="mobile-menu" aria-label="モバイルナビゲーション">
+  <button class="mobile-menu-close" aria-label="メニューを閉じる"></button>
   <ul>
     <li><a href="#solution">サービス</a></li>
     <li><a href="#features">特徴</a></li>
@@ -2095,6 +2128,15 @@ document.querySelectorAll('.fade-in').forEach((el, i) => {
 // ハンバーガーメニューの開閉
 const menuToggle = document.querySelector('.menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
+const mobileMenuClose = document.querySelector('.mobile-menu-close');
+
+// メニューを閉じる共通処理
+function closeMobileMenu() {
+  menuToggle.classList.remove('active');
+  mobileMenu.classList.remove('active');
+  document.body.classList.remove('menu-open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+}
 
 menuToggle.addEventListener('click', () => {
   const isOpen = menuToggle.classList.toggle('active');
@@ -2103,14 +2145,12 @@ menuToggle.addEventListener('click', () => {
   menuToggle.setAttribute('aria-expanded', isOpen);
 });
 
+// 閉じるボタンのクリックでメニューを閉じる
+mobileMenuClose.addEventListener('click', closeMobileMenu);
+
 // メニュー内のリンクタップ時にメニューを閉じる
 mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    menuToggle.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    document.body.classList.remove('menu-open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', closeMobileMenu);
 });
 
 // アンカーリンクをスムーズスクロール
