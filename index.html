@@ -325,31 +325,6 @@ body.menu-open { overflow: hidden; }
   position: relative;
   z-index: 1;
 }
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  border: 2px solid var(--primary-light);
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--primary);
-  margin-bottom: 28px;
-  box-shadow: var(--shadow-sm);
-}
-.hero-badge .dot {
-  width: 8px; height: 8px;
-  background: var(--accent-green);
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.3); }
-}
-
 .hero h1 {
   font-family: var(--font-heading);
   font-weight: 900;
@@ -1042,25 +1017,15 @@ body.menu-open { overflow: hidden; }
 }
 .process-steps {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+  gap: 12px;
+  align-items: start;
   position: relative;
-}
-.process-steps::before {
-  content: '';
-  position: absolute;
-  top: 36px; left: 10%; right: 10%;
-  height: 2px;
-  background-image: linear-gradient(to right, var(--primary) 50%, transparent 50%);
-  background-size: 12px 2px;
-  z-index: 0;
 }
 .process-step {
   text-align: center;
   position: relative;
-  z-index: 1;
-  background: var(--bg);
-  padding: 0 8px;
+  padding: 0 4px;
 }
 .step-num {
   width: 72px; height: 72px;
@@ -1092,6 +1057,40 @@ body.menu-open { overflow: hidden; }
   font-size: 13px;
   color: var(--text-soft);
 }
+
+/* ステップ間の矢印イラスト */
+.process-arrow {
+  width: 40px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.process-arrow svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.process-arrow svg path,
+.process-arrow svg polyline {
+  stroke: var(--primary);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* 矢印の流れアニメーション */
+@keyframes arrow-flow {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+.process-arrow svg {
+  animation: arrow-flow 2s ease-in-out infinite;
+}
+.process-arrow:nth-of-type(2) svg { animation-delay: 0.3s; }
+.process-arrow:nth-of-type(4) svg { animation-delay: 0.6s; }
+.process-arrow:nth-of-type(6) svg { animation-delay: 0.9s; }
+.process-arrow:nth-of-type(8) svg { animation-delay: 1.2s; }
 
 /* ============================================
    08. 料金プラン
@@ -1583,7 +1582,8 @@ body.menu-open { overflow: hidden; }
     grid-template-columns: repeat(2, 1fr);
   }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-steps { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .process-steps { gap: 8px; }
+  .process-arrow { width: 30px; }
 }
 
 @media (max-width: 768px) {
@@ -1610,8 +1610,17 @@ body.menu-open { overflow: hidden; }
   
   .price-card.featured { transform: scale(1); }
   
-  .process-steps { grid-template-columns: 1fr; gap: 32px; }
-  .process-steps::before { display: none; }
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  /* スマホ時は矢印を縦向きに回転 */
+  .process-arrow {
+    width: 100%;
+    height: 40px;
+    transform: rotate(90deg);
+    margin: 0 auto;
+  }
   
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-form { padding: 28px 24px; }
@@ -1663,10 +1672,6 @@ body.menu-open { overflow: hidden; }
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        中小企業に選ばれて15年・320社の実績
-      </div>
       <h1>
         デザインも、印刷も、<br>
         <span class="accent-orange">映像</span>も。<br>
@@ -1855,20 +1860,44 @@ body.menu-open { overflow: hidden; }
         <h4>ヒアリング</h4>
         <p>目的や課題を丁寧にお伺いします</p>
       </div>
+      <div class="process-arrow fade-in" aria-hidden="true">
+        <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12 H32" />
+          <polyline points="24,4 34,12 24,20" />
+        </svg>
+      </div>
       <div class="process-step fade-in">
         <div class="step-num">02</div>
         <h4>企画提案</h4>
         <p>最適な解決プランをご提案</p>
+      </div>
+      <div class="process-arrow fade-in" aria-hidden="true">
+        <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12 H32" />
+          <polyline points="24,4 34,12 24,20" />
+        </svg>
       </div>
       <div class="process-step fade-in">
         <div class="step-num">03</div>
         <h4>制作</h4>
         <p>専門チームが一貫して制作</p>
       </div>
+      <div class="process-arrow fade-in" aria-hidden="true">
+        <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12 H32" />
+          <polyline points="24,4 34,12 24,20" />
+        </svg>
+      </div>
       <div class="process-step fade-in">
         <div class="step-num">04</div>
         <h4>納品</h4>
         <p>確認・修正後にお届けします</p>
+      </div>
+      <div class="process-arrow fade-in" aria-hidden="true">
+        <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 12 H32" />
+          <polyline points="24,4 34,12 24,20" />
+        </svg>
       </div>
       <div class="process-step fade-in">
         <div class="step-num">05</div>
