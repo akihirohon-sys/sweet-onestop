@@ -1451,89 +1451,15 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
-   12. フッター
+   12. フッター — コピーライトのみ
 ============================================ */
 .footer {
   background: #131A2B;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 80px 40px 30px;
-}
-.footer-inner { max-width: 1280px; margin: 0 auto; }
-.footer-top {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.footer-brand .logo { color: white; margin-bottom: 16px; }
-.footer-brand p {
-  font-size: 13px;
-  line-height: 1.9;
-  margin-bottom: 24px;
-}
-.footer-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 12px;
   color: rgba(255, 255, 255, 0.6);
-}
-.footer-info-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.footer-info-item .label {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 0.05em;
-  flex-shrink: 0;
-}
-.footer-col h5 {
-  font-family: var(--font-heading);
-  font-weight: 900;
-  font-size: 14px;
-  color: white;
-  margin-bottom: 18px;
-}
-.footer-col ul { list-style: none; }
-.footer-col li {
-  padding: 6px 0;
-  font-size: 13px;
-}
-.footer-col a { transition: color 0.3s ease; }
-.footer-col a:hover { color: var(--accent-yellow); }
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 30px;
+  padding: 32px 40px;
+  text-align: center;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-}
-.footer-social { display: flex; gap: 12px; }
-.footer-social a {
-  width: 38px; height: 38px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
-}
-.footer-social a:hover {
-  background: var(--accent-orange);
-  transform: translateY(-3px);
+  letter-spacing: 0.05em;
 }
 
 /* ============================================
@@ -1560,7 +1486,6 @@ a { color: inherit; text-decoration: none; }
   }
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { grid-template-columns: repeat(5, 1fr); gap: 8px; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -1594,9 +1519,6 @@ a { color: inherit; text-decoration: none; }
   
   .cta-box { padding: 50px 24px; }
   .onestop-banner { padding: 32px 24px; }
-  
-  .footer-top { grid-template-columns: 1fr; gap: 32px; }
-  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
 </style>
 </head>
@@ -2038,65 +1960,9 @@ a { color: inherit; text-decoration: none; }
   </div>
 </section>
 
-<!-- ====== 11. フッター ====== -->
+<!-- ====== 11. フッター — コピーライトのみ ====== -->
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <div class="logo-mark"></div>
-          SWEET ONESTOP
-        </a>
-        <p>デザイン・印刷・映像制作をワンストップで。<br>クリエイティブの「ぜんぶ」を、ひとつの窓口でお届けします。</p>
-        <div class="footer-info">
-          <div class="footer-info-item">
-            <span class="label">所在地</span>
-            <span>〒107-0061 東京都港区青山2-1-1</span>
-          </div>
-          <div class="footer-info-item">
-            <span class="label">EMAIL</span>
-            <span>contact@sweet.jp</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h5>サービス</h5>
-        <ul>
-          <li><a href="#solution">デザイン制作</a></li>
-          <li><a href="#solution">印刷・プロダクト</a></li>
-          <li><a href="#solution">映像制作</a></li>
-          <li><a href="#solution">ブランディング</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>会社情報</h5>
-        <ul>
-          <li><a href="#">私たちについて</a></li>
-          <li><a href="#features">特徴</a></li>
-          <li><a href="#pricing">料金プラン</a></li>
-          <li><a href="#">採用情報</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>お問い合わせ</h5>
-        <ul>
-          <li><a href="#contact">お問い合わせ</a></li>
-          <li><a href="#contact">見積もり依頼</a></li>
-          <li><a href="#">よくある質問</a></li>
-          <li><a href="#">プライバシーポリシー</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div>© 2026 SWEET ONESTOP STUDIO. All rights reserved.</div>
-      <div class="footer-social">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="X (Twitter)">X</a>
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="YouTube">YT</a>
-      </div>
-    </div>
-  </div>
+  © 2026 SWEET ONESTOP STUDIO. All rights reserved.
 </footer>
 
 <script>
